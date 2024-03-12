@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #player-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Music Player</h1>
+
+    <div id="player-container">
+        <audio id="audio-player" controls>
+            <source src="song1.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+
+        <div>
+            <button onclick="playPause()">Play/Pause</button>
+            <button onclick="stop()">Stop</button>
+            <button onclick="nextSong()">Next Song</button>
+        </div>
+    </div>
+
+    <script>
+        var audio = document.getElementById("audio-player");
+        var currentSong = 1;
+        var songs = ["song1.mp3", "song2.mp3"];
+
+        function playPause() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        function stop() {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+
+        function nextSong() {
+            currentSong = (currentSong + 1) % songs.length;
+            audio.src = songs[currentSong];
+            audio.play();
+        }
+    </script>
+</body>
+</html>
